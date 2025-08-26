@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: transparent;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Animations */
+@keyframes cardFadeIn {
+  0% { opacity: 0; transform: translateY(14px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Main Scoreboard Panel */
+.sb-panel {
+  position: fixed; right: 0; top: 5%;
+  width: 380px; height: 90%;
+  background: rgba(21, 24, 33, 0.92);
+  border-radius: 18px 0 0 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+  padding: 16px;
+  transform: translateX(100%) scale(0.9);
+  opacity: 0;
+  transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+}
+.sb-panel.open { transform: translateX(0) scale(1); opacity: 1; display: flex; }
+
+/* Header */
+.sb-header {
+  display: flex; flex-direction: column; gap: 8px;
+  padding-bottom: 12px; border-bottom: 1px solid #1D2230;
+}
+.sb-title {
+  display: flex; align-items: center; gap: 8px;
+  color: #FFFFFF; font-size: 18px; font-weight: 700;
+}
+.sb-players-count {
+  display: inline-flex; align-items: center;
+  background: rgba(124, 58, 237, 0.15);
+  color: #7C3AED; padding: 4px 10px; border-radius: 10px;
+  font-size: 12px; font-weight: 600;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+/* Sections Container */
+.sb-sections { flex: 1; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; }
+.sb-sections::-webkit-scrollbar { width: 4px; }
+.sb-sections::-webkit-scrollbar-track { background: rgba(29,34,48,0.3); border-radius: 2px; }
+.sb-sections::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 2px; }
+
+/* Section visibility (1つだけ表示) */
+.sb-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: all 300ms ease-out;
+  background: rgba(29, 34, 48, 0.3);
+  border-radius: 12px;
+  border: 1px solid #1D2230;
+  overflow: hidden;
+}
+.sb-section.active { display: block; animation: fadeInUp 360ms ease-out forwards; }
+.sb-section-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; background: rgba(29, 34, 48, 0.5);
+  color: #FFFFFF; font-size: 15px; font-weight: 700;
+  border-bottom: 1px solid #1D2230;
+}
+.sb-section-content { padding: 10px 12px; }
+
+/* Players */
+.players-container { position: relative; height: 100%; display: flex; flex-direction: column; }
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* ★小型化 */
+  gap: 6px; padding: 6px 0; flex: 1; overflow-y: auto;
+  opacity: 1; transition: opacity 180ms ease;
+}
+.players-grid.changing { opacity: 0; }
+
+.player-card {
+  background: rgba(29,34,48,0.4);
+  border: 1px solid rgba(29,34,48,0.6);
+  border-radius: 8px; padding: 6px;
+  transition: all 160ms ease;
+  opacity: 0; transform: translateY(14px) scale(0.96);
+  animation: cardFadeIn 260ms ease-out forwards;
+  height: fit-content;
+}
+.player-card:hover {
+  background: rgba(124,58,237,0.08);
+  border-color: rgba(124,58,237,0.2);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 2px 8px rgba(124,58,237,0.1);
+}
+.player-card-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.player-avatar {
+  width: 22px; height: 22px; background: linear-gradient(135deg,#7C3AED,#22D3EE);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 600; font-size: 10px; flex-shrink: 0;
+}
+.player-info { flex: 1; min-width: 0; }
+.player-name {
+  color: #FFFFFF; font-size: 11px; font-weight: 600; margin-bottom: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.player-id { color: #B3B8C3; font-size: 9px; font-family: 'Courier New', monospace; }
+
+.player-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+.player-stats { display: flex; align-items: center; gap: 4px; }
+
+.pagination-container {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; padding: 6px 0; border-top: 1px solid #1D2230; margin-top: 6px;
+}
+.pagination-container.heist { margin-top: 10px; }
+.pagination-info { color: #B3B8C3; font-size: 11px; font-weight: 500; min-width: 60px; text-align: center; }
+
+.ping-badge {
+  background: rgba(34,211,238,0.15);
+  color: #22D3EE; padding: 1px 6px; border-radius: 6px; font-size: 10px; font-weight: 600;
+  font-family: 'Courier New', monospace; border: 1px solid rgba(34,211,238,0.2);
+}
+.job-tag {
+  background: rgba(179,184,195,0.15); color: #B3B8C3;
+  padding: 1px 5px; border-radius: 5px; font-size: 9px; font-weight: 500; display: none;
+}
+.job-tag.visible { display: inline-block; }
+
+/* Whitelist Jobs */
+.job-item {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 10px; padding: 6px 0;
+  border-bottom: 1px solid rgba(29,34,48,0.3); transition: all 150ms ease;
+}
+.job-item:last-child { border-bottom: none; }
+.job-item:hover {
+  background: rgba(124,58,237,0.05); border-radius: 6px;
+  margin: 0 -6px; padding: 6px 6px;
+}
+.job-left { display: flex; align-items: center; gap: 8px; }
+.job-status { width: 8px; height: 8px; border-radius: 50%; background: #B3B8C3; flex-shrink: 0; }
+.job-status.active { background: #22C55E; box-shadow: 0 0 8px rgba(34,197,94,0.3); }
+.job-label { color: #FFFFFF; font-size: 13px; font-weight: 500; white-space: nowrap; }
+.job-count { color: #B3B8C3; font-size: 12px; font-family: 'Courier New', monospace; text-align: right; min-width: 70px; }
+
+/* Heist Section */
+.heist-content { display: flex; flex-direction: column; gap: 6px; }
+.heist-item {
+  display: flex; flex-direction: column; gap: 6px; padding: 10px;
+  background: rgba(29,34,48,0.3); border-radius: 8px; border: 1px solid rgba(29,34,48,0.5);
+}
+.heist-header { display: flex; justify-content: space-between; align-items: center; }
+.heist-label { color: #FFFFFF; font-size: 13px; font-weight: 600; }
+.heist-status { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; transition: all 150ms ease; }
+.heist-status.ready { background: #22C55E; color: #fff; }
+.heist-status.locked { background: #EF4444; color: #fff; }
+.heist-count { color: #B3B8C3; font-size: 12px; font-family: 'Courier New', monospace; }
+.heist-count .number { color: #FFFFFF; font-weight: 600; }
+
+/* Icons */
+.icon { display: inline-flex; align-items: center; justify-content: center; }

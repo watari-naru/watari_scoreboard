@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WATARI Scoreboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Main Scoreboard Panel -->
+  <div class="sb-panel" id="scoreboardPanel">
+    <!-- Header -->
+    <div class="sb-header">
+      <div class="sb-title">
+        <span class="icon">🕒</span>
+        SCOREBOARD
+      </div>
+      <div class="sb-players-count">Players 0 / 300</div>
+    </div>
+
+    <!-- Sections -->
+    <div class="sb-sections">
+      <!-- Online Players Section -->
+      <div class="sb-section" id="playersSection">
+        <div class="sb-section-header">
+          <span class="icon">👥</span>
+          オンラインプレイヤー
+        </div>
+        <div class="sb-section-content">
+          <div class="players-container">
+            <div class="players-grid" id="playersGrid"></div>
+            <div class="pagination-container">
+              <div class="pagination-info" id="pageInfo">1 / 1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Whitelist Jobs Section -->
+      <div class="sb-section" id="whitelistSection">
+        <div class="sb-section-header">
+          <span class="icon">🛡️</span>
+          ホワイトリストジョブ
+        </div>
+        <div class="sb-section-content" id="whitelistContent"></div>
+      </div>
+
+      <!-- Heist Info Section -->
+      <div class="sb-section" id="heistSection">
+        <div class="sb-section-header">
+          ヘイスト情報
+        </div>
+        <div class="sb-section-content">
+          <div class="heist-content" id="heistContent"></div>
+          <div class="pagination-container heist">
+            <div class="pagination-info" id="heistPageInfo">1 / 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
