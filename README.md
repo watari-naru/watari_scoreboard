@@ -41,25 +41,25 @@ A sleek **right-side sliding scoreboard UI** for FiveM.
 ## Behavior
 
 First key press opens the panel.
-・Repeated presses cycle:
-  ・Players: page → page (loops if Players is the only enabled section)
-  ・Whitelist → Heist (with paging when >10) → close (if multiple sections)
-・ESC closes immediately (no mouse cursor shown).
+- ・Repeated presses cycle:
+-   ・Players: page → page (loops if Players is the only enabled section)
+-   ・Whitelist → Heist (with paging when >10) → close (if multiple sections)
+- ・ESC closes immediately (no mouse cursor shown).
 ---
 ---
 ## Customization
 
-・Players per page: playersPerPage via setup (default 60)
-・Heists per page: heistPerPage via setup (default 10)
-・Refresh cadence: Config.RefreshMs (server push frequency)
-・Styling: tweak html/style.css (colors, radii, blur)
-・Labels: change label fields in config.lua
+- ・Players per page: playersPerPage via setup (default 60)
+- ・Heists per page: heistPerPage via setup (default 10)
+- ・Refresh cadence: Config.RefreshMs (server push frequency)
+- ・Styling: tweak html/style.css (colors, radii, blur)
+- ・Labels: change label fields in config.lua
 
 ---
 ---
 
 ## Performance Tips
 
-・Keep Config.RefreshMs sensible (e.g., 3000–10000 ms).
-・Avoid heavy server loops; push updates on demand (key press) + light interval.
+- ・Keep Config.RefreshMs sensible (e.g., 3000–10000 ms).
+- ・Avoid heavy server loops; push updates on demand (key press) + light interval.
 ---
