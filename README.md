@@ -9,7 +9,7 @@ You’re welcome to modify it freely.
 A sleek **right-side sliding scoreboard UI** for FiveM.  
 **Keyboard-only** (no mouse), configurable sections, **player mini-cards with paging**, and **multi-heist paging** out of the box.
 
-![screenshot](docs/screenshot.png) <!-- replace or remove -->
+![screenshot](docs/screenshot.png)
 
 ---
 
@@ -36,16 +36,18 @@ A sleek **right-side sliding scoreboard UI** for FiveM.
 - Add to `server.cfg`:
   ```cfg
   ensure watari_scoreboard
-
-Behavior
+  
+---
+## Behavior
 
 First key press opens the panel.
 ・Repeated presses cycle:
   ・Players: page → page (loops if Players is the only enabled section)
   ・Whitelist → Heist (with paging when >10) → close (if multiple sections)
 ・ESC closes immediately (no mouse cursor shown).
-
-Customization
+---
+---
+## Customization
 
 ・Players per page: playersPerPage via setup (default 60)
 ・Heists per page: heistPerPage via setup (default 10)
@@ -53,7 +55,11 @@ Customization
 ・Styling: tweak html/style.css (colors, radii, blur)
 ・Labels: change label fields in config.lua
 
-Performance Tips
+---
+---
+
+## Performance Tips
 
 ・Keep Config.RefreshMs sensible (e.g., 3000–10000 ms).
 ・Avoid heavy server loops; push updates on demand (key press) + light interval.
+---
